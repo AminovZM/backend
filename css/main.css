@@ -1,0 +1,113 @@
+  
+/* Reset стилей */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif; /* Используем шрифт Arial */
+  
+  /* Устанавливаем фоновое изображение и определяем его свойства */
+  background-image: url('../static/bground.jpg');
+  background-size: cover; /* Заполняем всю доступную область */
+  background-position: center; /* Располагаем изображение по центру */
+  background-repeat: no-repeat; /* Запрещаем повторение изображения */
+}
+
+/* Общий стиль для формы */
+#loginForm {
+  width: 300px;
+  margin: 100px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  opacity: 0.85; /* Дополнительно задаем прозрачность 85% */
+}
+
+/* Заголовок формы */
+p {
+  font-size: 18px;
+  text-align: left;
+  color: #023f7f;
+}
+
+#registerForm {
+  width: 300px;
+  margin: 100px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  opacity: 0.85; /* Дополнительно задаем прозрачность 85% */
+}
+
+/* Стиль для полей ввода */
+input[type="text"],
+input[type="password"] {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Стиль для кнопки */
+button[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #0056b3;
+  color: #fff;
+  cursor: pointer;
+}
+
+button[type="submit"]:active {
+  background-color: #023f7f;
+}
+
+/* Стиль для блока ответа */
+#response {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* Стиль для сообщения об ошибке */
+#error {
+  color: red;
+}
+
+/* Стиль для успешного сообщения */
+#success {
+  color: green;
+}
+
+.button_in_loginform {
+  width: 300px;
+  margin: 100px auto -105px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+
+.revers_link {
+  float: right;
+  display: inline-block;
+  padding: 7px 20px;
+  border: 2px solid #0056b3;
+  border-radius: 5px;
+  background-color: transparent;
+  color: #321b1b;
+  text-decoration: none;
+  cursor: pointer;
+  margin-top: 8px; /* Немного поднимаем */
+  margin-right: 1px; /* Сдвигаем влево */
+}
+
+.revers_link:active {
+  background-color: #0056b3;
+  color: #fff;
+}

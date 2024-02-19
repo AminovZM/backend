@@ -1,0 +1,278 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+}
+
+header {
+  background-color: #000000;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.div_button {
+  margin-left: auto;
+}
+
+.button_main {
+  display: inline-block;
+  padding: 7px 20px;
+  margin: 0 55px;
+  border: 2px solid #ffffff;
+  border-radius: 5px;
+  background-color: transparent;
+  color: #ffffff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+ .button_header {
+  display: inline-block;
+  padding: 7px 20px;
+  margin: 0 5px;
+  border: 2px solid #ffffff;
+  border-radius: 5px;
+  background-color: transparent;
+  color: #ffffff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button_main:active, .button_header:active {
+  background-color: #ff0040;
+  color: #fff;
+}
+
+
+#logout {
+  position: relative;
+  margin-left: auto;
+  margin-right: 5px;
+  width: 100px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #0056b3;
+  color: #fff;
+  cursor: pointer;
+}
+
+#logout:active {
+  background-color: #ff0040;
+}
+
+#categories {
+  width: 10%;
+  position: fixed;
+  top: 50px; /* Отступ от верхней границы на высоту header */
+  left: 0;
+  height: calc(100% - 1.5cm); /* Высота окна минус высота header */
+  overflow-y: auto; /* Добавляем прокрутку, если категорий слишком много */
+  background-color: #292929;
+  padding: 20px;
+}
+
+#categories button {
+  color: #ffffff;
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #0056b3;
+  text-align: center; /* Выравниваем текст по центру */
+  border: none;
+}
+
+#categories button:active {
+  background-color: #ff0040;
+}
+
+#content {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+#products_container {
+  width: 60%;
+}
+
+#products_table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#products_table th, #products_table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+#products_table th {
+  background-color: #f2f2f2;
+}
+
+/* Ваши стили */
+
+.product_card {
+  border: 2px solid #000000;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.product_card h3 {
+  margin-top: 0;
+}
+
+.product_card p {
+  margin-bottom: 10px;
+}
+
+.add_to_cart {
+  display: flex;
+  align-items: center;
+}
+
+/* Добавим стили для кнопки "Добавить в корзину" */
+.add_to_cart button {
+  margin-right: 2px;
+  background-color: #0056b3; /* Зеленый цвет фона */
+  color: white; /* Белый цвет текста */
+  border: none; /* Убираем границы */
+  border-radius: 5px; /* Закругляем углы */
+  padding: 10px 20px; /* Отступы внутри кнопки */
+  cursor: pointer; /* Изменяем указатель при наведении */
+  transition: background-color 0.3s; /* Плавное изменение цвета при наведении */
+}
+
+.add_to_cart button:active {
+  background-color: #ff0040; /* Темнозеленый цвет фона при наведении */
+}
+
+
+/* Стили для товаров в корзине */
+.basket_item {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #f9f9f9;
+}
+
+.basket_item_info {
+  margin-bottom: 10px;
+}
+
+.basket_item_info p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.basket_item_info p:first-child {
+  font-weight: bold;
+}
+
+.basket_item_actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.basket_item_actions button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 3px;
+  background-color: #0056b3;
+  color: #fff;
+  cursor: pointer;
+}
+
+#total_amount {
+  float: left;
+  margin-left: 550px;
+  font-weight: bold;
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between; /* Распределяем элементы равномерно */
+  align-items: center; /* Выравниваем элементы по центру */
+}
+
+#make_order_button {
+  float: right;
+  margin-right: 700px;
+  margin-top: 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #0056b3;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#make_order_button:active {
+  background-color: #ff0040;
+}
+
+
+
+
+.search_container {
+  display: flex;
+  margin-left: 7cm; /* отступ справа х см */
+
+}
+
+#search_input {
+  padding: 8px;
+  margin-right: 5px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+#search_button {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: #0056b3;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#search_button:active {
+  background-color: #ff0040;
+}
+
+.user_name {
+  display: flex;
+  margin-left: 8cm; /* отступ справа 10 см */
+
+}
+
+
+#current_user {
+  text-transform: uppercase; /* Преобразует текст в заглавные буквы */
+  color: #ffffff;
+}
+
+#btn_del {
+  float: right;
+  margin-right: 1300px;
+  margin-top: -35px;
+  padding: 7px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #e2023a;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#btn_del:active {
+  background-color: #0056b3;
+}

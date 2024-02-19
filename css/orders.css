@@ -1,0 +1,62 @@
+.order-card {
+    flex-direction: column;
+    margin: auto;
+    width: 70%;
+    border: 2px solid #000000;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+    font-family: 'Arial', sans-serif;
+    color: rgb(0, 0, 0);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.order-details {
+    font-weight: bold;
+
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.order-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.order-table th, .order-table td {
+    border: 1px solid #000000;
+    padding: 10px;
+    text-align: left;
+}
+
+.order-table th {
+    color: white;
+
+    background-color: #0056b3;
+}
+
+.order-table td {
+    vertical-align: middle;
+}
+
+.order-table th:first-child, .order-table td:first-child {
+    width: 50%;
+}
+
+.order-table th:nth-child(2), .order-table td:nth-child(2) {
+    width: 25%;
+}
+
+.order-table th:nth-child(3), .order-table td:nth-child(3) {
+    width: 25%;
+}
+
+.order-card p {
+    margin-bottom: 10px;
+}
+
+td {
+    text-transform: uppercase;
+}
