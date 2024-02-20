@@ -98,14 +98,9 @@ getProducts('beverages');
 
 async function get_user() {
     try {
-        const response = await fetch('https://aminov-test.onrender.com/users/me', {
-            method: 'GET',
-            headers: {
-                'accept': 'application/json'
-            },
+        const response = await fetch(`https://aminov-test.onrender.com/users/me`, {
             credentials: 'include' // Включаем передачу куки
         });
-        
         if (!response.ok) {
             document.getElementById('current_user').textContent = 'Unauthorized';
             // Изменяем текст кнопки на "Login"
