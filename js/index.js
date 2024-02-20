@@ -9,7 +9,7 @@ async function addToCart(productId) {
 
         const data = { id: productId, quantity: quantities[productId], id_user: user_id }; // Используем текущее количество товара из объекта quantities
         
-        const response = await fetch('http://127.0.0.1:8000/baskets/', {
+        const response = await fetch('https://aminov-test.onrender.com/baskets/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -31,7 +31,7 @@ async function addToCart(productId) {
 
 async function getProducts(category) {
     try {
-        const response = await fetch(`http://127.0.0.1:8000/products/?product_category=${category}`);
+        const response = await fetch(`https://aminov-test.onrender.com/products/?product_category=${category}`);
         if (!response.ok) {
             throw new Error('Ошибка получения данных от сервера');
         }
@@ -98,9 +98,14 @@ getProducts('beverages');
 
 async function get_user() {
     try {
-        const response = await fetch(`http://127.0.0.1:8000/users/me`, {
+        const response = await fetch('https://aminov-test.onrender.com/users/me', {
+            method: 'GET',
+            headers: {
+                'accept': 'application/json'
+            },
             credentials: 'include' // Включаем передачу куки
         });
+        
         if (!response.ok) {
             document.getElementById('current_user').textContent = 'Unauthorized';
             // Изменяем текст кнопки на "Login"
@@ -121,4 +126,5 @@ async function get_user() {
     }
 }
 
-get_user();
+//get_user();
+setTimeout(get_user, 5000);

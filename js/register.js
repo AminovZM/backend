@@ -13,10 +13,9 @@ document.getElementById('registerForm').addEventListener('submit', async functio
             is_superuser: false,
             is_verified: false,
             username: username,
-            role_id: 1
         };
         
-        const response = await fetch('http://localhost:8000/auth/register', {
+        const response = await fetch('https://aminov-test.onrender.com/auth/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

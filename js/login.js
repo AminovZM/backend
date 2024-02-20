@@ -13,10 +13,11 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
         formData.append('client_id', 1);
         formData.append('client_secret', 1);
 
-        const response = await fetch('http://127.0.0.1:8000/auth/login', {
+        const response = await fetch('https://aminov-test.onrender.com/auth/login', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Accept': 'application/json' // Добавляем заголовок accept
             },
             body: formData,
             credentials: 'include' // Включаем передачу куки
@@ -25,6 +26,16 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
         //const data = await response.json();
 
         if (response.ok) {
+            const response2 = await fetch('https://aminov-test.onrender.com/users/me', {
+                method: 'GET',
+                headers: {
+                    'accept': 'application/json'
+                },
+                credentials: 'include' // Включаем передачу куки
+            });
+            if (!response2.ok) {
+                alert("good");
+            }
             // Если запрос успешен, отобразите полученные данные
             //document.getElementById('response').textContent = `Имя пользователя: ${data.username}, День рождения: ${data.birthdate}`;
             document.getElementById('response').textContent = 'Вы вошли в систему\nstatus code ' + response.status;

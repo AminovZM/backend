@@ -1,6 +1,6 @@
 document.getElementById('logout').addEventListener('click', async function(event) {
     try {
-        const response = await fetch('http://127.0.0.1:8000/auth/logout', {
+        const response = await fetch('https://aminov-test.onrender.com/auth/logout', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json'
