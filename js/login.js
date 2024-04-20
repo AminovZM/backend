@@ -27,8 +27,10 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
 
         if (response.ok) {
             const response2 = await fetch(`https://aminov-test.onrender.com/users/me`, {
+                method: 'GET',
                 credentials: 'include' // Включаем передачу куки
             });
+            alert(response2.status);
             // Если запрос успешен, отобразите полученные данные
             //document.getElementById('response').textContent = `Имя пользователя: ${data.username}, День рождения: ${data.birthdate}`;
             document.getElementById('response').textContent = 'Вы вошли в систему\nstatus code ' + response.status;
