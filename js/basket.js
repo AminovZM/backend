@@ -5,78 +5,84 @@ window.addEventListener('DOMContentLoaded', async () => {
         const response = await fetch(`https://aminov-test.onrender.com/users/me`, {
             credentials: 'include' // Включаем передачу куки
         });
+        if (!response.ok) {
+            document.getElementById('logout').textContent = 'Login';
+            alert("Unauthorized");
+        } else{
+            // Получаем строку JSON из локального хранилища
+            const data_current_user = sessionStorage.getItem('data_current_user');
+            // Преобразуем строку JSON в объект JavaScript
+            const userObject = JSON.parse(data_current_user);
+            // Обращаемся к свойству id_user
+            const user_id = userObject.id;
 
-        // Получаем строку JSON из локального хранилища
-        const data_current_user = sessionStorage.getItem('data_current_user');
-        // Преобразуем строку JSON в объект JavaScript
-        const userObject = JSON.parse(data_current_user);
-        // Обращаемся к свойству id_user
-        const user_id = userObject.id;
+            // Получаем данные о корзине из API
+            const basketResponse = await fetch(`https://aminov-test.onrender.com/baskets/?id_user=${user_id}`);
+            let basketData = await basketResponse.json();
 
-        // Получаем данные о корзине из API
-        const basketResponse = await fetch(`https://aminov-test.onrender.com/baskets/?id_user=${user_id}`);
-        let basketData = await basketResponse.json();
-
-        // Создаем массив для хранения промисов получения данных о продуктах
-        const productPromises = basketData.map(async (item) => {
-            const productId = item.id;
-            const productResponse = await fetch(`https://aminov-test.onrender.com/products/id?product_id=${productId}`);
-            const productData = await productResponse.json();
-            return { ...item, ...productData[0] }; // Добавляем данные о продукте к элементу корзины
-        });
-
-        // Ожидаем завершения всех промисов
-        basketData = await Promise.all(productPromises);
-        
-
-        // Отображаем товары из корзины
-        const basketItemsElement = document.getElementById('basket_items');
-        let totalAmount = 0; // Переменная для хранения общей суммы
-        for (let i = 0; i < basketData.length; i++) {
-            const productId = basketData[i].id;
-            const productData = basketData[i]; // Данные о продукте для текущего элемента
-
-            // Создаем элемент для отображения товара
-            const productElement = document.createElement('div');
-            productElement.classList.add('basket_item'); // Добавляем класс для стилизации
-            totalAmount += basketData[i].quantity * basketData[i].price; // Добавляем сумму текущего товара к общей сумме
-            productElement.innerHTML = `
-                <div class="basket_item_info">
-                    <p>ID: ${productId}</p>
-                    <p>Name: ${productData.name}</p>
-                    <p>Price: ${productData.price}</p>
-                    <p>Quantity: ${productData.quantity}</p>
-                </div>
-            `;
-
-            // Создаем кнопку "Удалить" для товара
-            const deleteButton = document.createElement('button');
-            deleteButton.textContent = 'Delete';
-            deleteButton.id = 'btn_del'; // Добавляем id
-            deleteButton.addEventListener('click', async () => {
-                try {
-                    const response = await fetch(`https://aminov-test.onrender.com/baskets/${user_id}/${productId}`, {
-                        method: 'DELETE',
-                        headers: {
-                            'accept': 'application/json'
-                        }
-                    });
-                    if (response.ok) {
-                        // Обновляем страницу после успешного удаления
-                        location.reload();
-                    } else {
-                        console.error('Failed to delete product from basket');
-                    }
-                } catch (error) {
-                    console.error('Error:', error.message);
-                }
+            // Создаем массив для хранения промисов получения данных о продуктах
+            const productPromises = basketData.map(async (item) => {
+                const productId = item.id;
+                const productResponse = await fetch(`https://aminov-test.onrender.com/products/id?product_id=${productId}`);
+                const productData = await productResponse.json();
+                return { ...item, ...productData[0] }; // Добавляем данные о продукте к элементу корзины
             });
 
-            // Добавляем кнопку "Удалить" к элементу товара
-            productElement.appendChild(deleteButton);
-
-            basketItemsElement.appendChild(productElement);
+            // Ожидаем завершения всех промисов
+            basketData = await Promise.all(productPromises);
             
+            const response = await fetch(`https://aminov-test.onrender.com/users/me`, {
+                credentials: 'include' // Включаем передачу куки
+            });
+
+            // Отображаем товары из корзины
+            const basketItemsElement = document.getElementById('basket_items');
+            let totalAmount = 0; // Переменная для хранения общей суммы
+            for (let i = 0; i < basketData.length; i++) {
+                const productId = basketData[i].id;
+                const productData = basketData[i]; // Данные о продукте для текущего элемента
+
+                // Создаем элемент для отображения товара
+                const productElement = document.createElement('div');
+                productElement.classList.add('basket_item'); // Добавляем класс для стилизации
+                totalAmount += basketData[i].quantity * basketData[i].price; // Добавляем сумму текущего товара к общей сумме
+                productElement.innerHTML = `
+                    <div class="basket_item_info">
+                        <p>ID: ${productId}</p>
+                        <p>Name: ${productData.name}</p>
+                        <p>Price: ${productData.price}</p>
+                        <p>Quantity: ${productData.quantity}</p>
+                    </div>
+                `;
+
+                // Создаем кнопку "Удалить" для товара
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete';
+                deleteButton.id = 'btn_del'; // Добавляем id
+                deleteButton.addEventListener('click', async () => {
+                    try {
+                        const response = await fetch(`https://aminov-test.onrender.com/baskets/${user_id}/${productId}`, {
+                            method: 'DELETE',
+                            headers: {
+                                'accept': 'application/json'
+                            }
+                        });
+                        if (response.ok) {
+                            // Обновляем страницу после успешного удаления
+                            location.reload();
+                        } else {
+                            console.error('Failed to delete product from basket');
+                        }
+                    } catch (error) {
+                        console.error('Error:', error.message);
+                    }
+                });
+
+                // Добавляем кнопку "Удалить" к элементу товара
+                productElement.appendChild(deleteButton);
+
+                basketItemsElement.appendChild(productElement);
+            }
 
             // Создаем элемент для отображения общей суммы
             const totalAmountElement = document.createElement('div');
