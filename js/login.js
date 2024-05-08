@@ -22,17 +22,17 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
             body: formData,
             credentials: 'include' // Включаем передачу куки
         });
-
+        alert(document.cookie)
         //const data = await response.json();
 
         if (response.ok) {
-            const response2 = fetch(`https://aminov-test.onrender.com/users/me`, {
+            const response2 = await fetch(`https://aminov-test.onrender.com/users/me`, {
                 method: 'GET',
                 //credentials: 'include' // Включаем передачу куки
                 //withCredentials: true,
                 headers: {
                     'Accept': 'application/json',
-                    'Cookie': 'bonds'                
+                    'Cookie': document.cookie               
                 }
             });
             alert(response2.status);
