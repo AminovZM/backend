@@ -22,19 +22,27 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
             body: formData,
             credentials: 'include' // Включаем передачу куки
         });
-        alert(document.cookie)
-        //const data = await response.json();
+        // Получаем куки из заголовка ответа
+        const cookies = response.headers.raw()['set-cookie'];
 
         if (response.ok) {
-            const response2 = await fetch(`https://aminov-test.onrender.com/users/me`, {
+            // После успешной авторизации сохраняем куки
+            const cookie = cookies.map(cookie => cookie.split(';')[0]).join(';');
+
+            // Далее при выполнении следующих запросов передаем сохраненные куки
+            const userDataResponse = await fetch('https://aminov-test.onrender.com/users/me', {
                 method: 'GET',
-                //credentials: 'include' // Включаем передачу куки
-                //withCredentials: true,
                 headers: {
                     'Accept': 'application/json',
-                    'Cookie': document.cookie               
+                    'Cookie': cookie // Передаем сохраненные куки
                 }
             });
+
+            // Обработка ответа
+            const userData = await userDataResponse.json();
+            console.log('Данные пользователя:', userData);
+
+
             alert(response2.status);
             // Если запрос успешен, отобразите полученные данные
             //document.getElementById('response').textContent = `Имя пользователя: ${data.username}, День рождения: ${data.birthdate}`;
