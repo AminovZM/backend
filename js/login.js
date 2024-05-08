@@ -31,7 +31,6 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
                 //credentials: 'include' // Включаем передачу куки
                 withCredentials: true,
                 headers: {
-                    'Content-Type': 'application/json',
                     'access-control-allow-credentials': true,
                 }
             });
