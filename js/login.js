@@ -28,7 +28,12 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
         if (response.ok) {
             const response2 = await fetch(`https://aminov-test.onrender.com/users/me`, {
                 method: 'GET',
-                withCredentials: true
+                //credentials: 'include' // Включаем передачу куки
+                withCredentials: true,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'access-control-allow-credentials': true,
+                }
             });
             alert(response2.status);
             // Если запрос успешен, отобразите полученные данные
