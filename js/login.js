@@ -1,3 +1,6 @@
+
+// 'https://aminov-test.onrender.com/auth/login'
+
 document.getElementById('loginForm').addEventListener('submit', async function(event) {
     event.preventDefault();
 
@@ -22,33 +25,30 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
             body: formData,
             credentials: 'include' // Включаем передачу куки
         });
-        // Получаем куки из заголовка ответа
-        const cookies = response.headers.raw()['set-cookie'];
 
         if (response.ok) {
-            // После успешной авторизации сохраняем куки
-            const cookie = cookies.map(cookie => cookie.split(';')[0]).join(';');
+            // Если запрос успешен, сохраните куки
+            const cookies = response.headers.get('Set-Cookie');
+            document.cookie = cookies;
 
-            // Далее при выполнении следующих запросов передаем сохраненные куки
-            const userDataResponse = await fetch('https://aminov-test.onrender.com/users/me', {
+            // Отправьте второй запрос с этими куками
+            const response2 = await fetch('https://aminov-test.onrender.com/users/me', {
                 method: 'GET',
                 headers: {
-                    'Accept': 'application/json',
-                    'Cookie': cookie // Передаем сохраненные куки
-                }
+                    'Cookie': document.cookie,
+                    'accept': 'application/json'
+                },
+                credentials: 'include' // Включаем передачу куки
             });
 
-            // Обработка ответа
-            const userData = await userDataResponse.json();
-            console.log('Данные пользователя:', userData);
-
-
-            alert(response2.status);
-            // Если запрос успешен, отобразите полученные данные
-            //document.getElementById('response').textContent = `Имя пользователя: ${data.username}, День рождения: ${data.birthdate}`;
-            document.getElementById('response').textContent = 'Вы вошли в систему\nstatus code ' + response.status;
-            window.location.href = '../index.html'; // Перенаправление на другую страницу в той же директории
-            //const { token } = await response.json();
+            if (response2.ok) {
+                // Если второй запрос успешен, отобразите успешное сообщение
+                document.getElementById('response').textContent = 'Вы вошли в систему\nstatus code ' + response.status;
+                window.location.href = '../index.html'; // Перенаправление на другую страницу в той же директории
+            } else {
+                // Если второй запрос вернул ошибку, отобразите сообщение об ошибке
+                alert("good");
+            }
 
         } else {
             // Если запрос вернул ошибку, отобразите сообщение об ошибке
@@ -60,6 +60,3 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
         document.getElementById('response').textContent = 'Ошибка при отправке запроса';
     }
 });
-
-
-
