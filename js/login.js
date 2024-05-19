@@ -27,27 +27,27 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
         });
 
         if (response.ok) {
-            // Если запрос успешен, сохраните куки
-            const cookies = response.headers.get('Set-Cookie');
-            document.cookie = cookies;
-
             // Отправьте второй запрос с этими куками
-            const response2 = await fetch('https://aminov-test.onrender.com/users/me', {
+            const response2 = await fetch('https://aminov-test.onrender.com/current_user', {
                 method: 'GET',
                 headers: {
-                    'Cookie': document.cookie,
+                    //'Cookie': bondsCookie,
                     'accept': 'application/json'
                 },
                 credentials: 'include' // Включаем передачу куки
             });
 
+            const data2 = await response2.json();
+            
             if (response2.ok) {
+                console.log(data2);
+                alert("good");
                 // Если второй запрос успешен, отобразите успешное сообщение
                 document.getElementById('response').textContent = 'Вы вошли в систему\nstatus code ' + response.status;
                 window.location.href = '../index.html'; // Перенаправление на другую страницу в той же директории
             } else {
                 // Если второй запрос вернул ошибку, отобразите сообщение об ошибке
-                alert("good");
+                alert("error");
             }
 
         } else {
