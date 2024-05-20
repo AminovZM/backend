@@ -1,5 +1,5 @@
 
-// 'https://aminov-test.onrender.com/auth/login'
+// 'https://back-render-qgwc.onrender.com/auth/login'
 
 document.getElementById('loginForm').addEventListener('submit', async function(event) {
     event.preventDefault();
@@ -16,7 +16,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
         formData.append('client_id', 1);
         formData.append('client_secret', 1);
 
-        const response = await fetch('https://aminov-test.onrender.com/auth/login', {
+        const response = await fetch('https://back-render-qgwc.onrender.com/auth/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -28,7 +28,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
 
         if (response.ok) {
             // Отправьте второй запрос с этими куками
-            const response2 = await fetch('https://aminov-test.onrender.com/current_user', {
+            const response2 = await fetch('https://back-render-qgwc.onrender.com/current_user', {
                 method: 'GET',
                 headers: {
                     //'Cookie': bondsCookie,
