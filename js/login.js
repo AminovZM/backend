@@ -29,7 +29,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
         if (response.ok) {
             // Отправьте второй запрос с этими куками
             const response2 = await fetch('https://back-render-qgwc.onrender.com/current_user', {
-                method: 'GET',
+                method: 'POST',
                 headers: {
                     //'Cookie': bondsCookie,
                     'accept': 'application/json'
