@@ -2,7 +2,7 @@
 
 window.addEventListener('DOMContentLoaded', async () => {
     try {
-        const response = await fetch(`https://back-render-qgwc.onrender.com/users/me`, {
+        const response = await fetch(`https://front-end-l0jy.onrender.com/users/me`, {
             credentials: 'include' // Включаем передачу куки
         });
         if (!response.ok) {
@@ -17,13 +17,13 @@ window.addEventListener('DOMContentLoaded', async () => {
             const user_id = userObject.id;
 
             // Получаем данные о корзине из API
-            const basketResponse = await fetch(`https://back-render-qgwc.onrender.com/baskets/?id_user=${user_id}`);
+            const basketResponse = await fetch(`https://front-end-l0jy.onrender.com/baskets/?id_user=${user_id}`);
             let basketData = await basketResponse.json();
 
             // Создаем массив для хранения промисов получения данных о продуктах
             const productPromises = basketData.map(async (item) => {
                 const productId = item.id;
-                const productResponse = await fetch(`https://back-render-qgwc.onrender.com/products/id?product_id=${productId}`);
+                const productResponse = await fetch(`https://front-end-l0jy.onrender.com/products/id?product_id=${productId}`);
                 const productData = await productResponse.json();
                 return { ...item, ...productData[0] }; // Добавляем данные о продукте к элементу корзины
             });
@@ -31,7 +31,7 @@ window.addEventListener('DOMContentLoaded', async () => {
             // Ожидаем завершения всех промисов
             basketData = await Promise.all(productPromises);
             
-            const response = await fetch(`https://back-render-qgwc.onrender.com/users/me`, {
+            const response = await fetch(`https://front-end-l0jy.onrender.com/users/me`, {
                 credentials: 'include' // Включаем передачу куки
             });
 
@@ -61,7 +61,7 @@ window.addEventListener('DOMContentLoaded', async () => {
                 deleteButton.id = 'btn_del'; // Добавляем id
                 deleteButton.addEventListener('click', async () => {
                     try {
-                        const response = await fetch(`https://back-render-qgwc.onrender.com/baskets/${user_id}/${productId}`, {
+                        const response = await fetch(`https://front-end-l0jy.onrender.com/baskets/${user_id}/${productId}`, {
                             method: 'DELETE',
                             headers: {
                                 'accept': 'application/json'
@@ -137,7 +137,7 @@ async function createOrder(user_id, basketData) {
         }
 
         // Отправляем запрос POST на API
-        const response = await fetch('https://back-render-qgwc.onrender.com/orders/', {
+        const response = await fetch('https://front-end-l0jy.onrender.com/orders/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -153,7 +153,7 @@ async function createOrder(user_id, basketData) {
         if (response.ok) {
             console.log('Order placed successfully!');
             
-            fetch(`https://back-render-qgwc.onrender.com/baskets/?id_user=${user_id}`, {
+            fetch(`https://front-end-l0jy.onrender.com/baskets/?id_user=${user_id}`, {
                 method: 'DELETE',
                 headers: {
                     'accept': 'application/json'

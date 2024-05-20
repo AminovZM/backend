@@ -15,7 +15,7 @@ document.getElementById('registerForm').addEventListener('submit', async functio
             username: username,
         };
         
-        const response = await fetch('https://back-render-qgwc.onrender.com/auth/register', {
+        const response = await fetch('https://front-end-l0jy.onrender.com/auth/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

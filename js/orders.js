@@ -1,6 +1,6 @@
 window.addEventListener('DOMContentLoaded', async () => {
     try {
-        const response = await fetch(`https://back-render-qgwc.onrender.com/users/me`, {
+        const response = await fetch(`https://front-end-l0jy.onrender.com/users/me`, {
             credentials: 'include' // Включаем передачу куки
         });
         if (!response.ok) {
@@ -14,7 +14,7 @@ window.addEventListener('DOMContentLoaded', async () => {
             // Обращаемся к свойству id_user
             const user_id = userObject.id;
             // Получаем данные о заказах пользователя из API
-            const ordersResponse = await fetch(`https://back-render-qgwc.onrender.com/orders/?id_user=${user_id}`);
+            const ordersResponse = await fetch(`https://front-end-l0jy.onrender.com/orders/?id_user=${user_id}`);
             const ordersData = await ordersResponse.json();
 
             // Полученные данные обрабатываем и отображаем на странице
