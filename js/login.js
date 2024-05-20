@@ -34,7 +34,8 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
                     //'Cookie': bondsCookie,
                     'accept': 'application/json'
                 },
-                credentials: 'include' // Включаем передачу куки
+                credentials: 'include', // Включаем передачу куки
+                withcredentials: true,
             });
 
             const data2 = await response2.json();
