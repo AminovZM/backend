@@ -3,7 +3,7 @@ document.getElementById('search_button').addEventListener('click', async () => {
 
     const searchInputValue = document.getElementById('search_input').value;
     try {
-        const response = await fetch(`https://front-end-l0jy.onrender.com/products/name?product_name=${searchInputValue}`, {
+        const response = await fetch(`https://back-render-qgwc.onrender.com/products/name?product_name=${searchInputValue}`, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json'

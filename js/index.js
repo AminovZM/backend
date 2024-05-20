@@ -9,7 +9,7 @@ async function addToCart(productId) {
 
         const data = { id: productId, quantity: quantities[productId], id_user: user_id }; // Используем текущее количество товара из объекта quantities
         
-        const response = await fetch('https://front-end-l0jy.onrender.com/baskets/', {
+        const response = await fetch('https://back-render-qgwc.onrender.com/baskets/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -31,7 +31,7 @@ async function addToCart(productId) {
 
 async function getProducts(category) {
     try {
-        const response = await fetch(`https://front-end-l0jy.onrender.com/products/?product_category=${category}`);
+        const response = await fetch(`https://back-render-qgwc.onrender.com/products/?product_category=${category}`);
         if (!response.ok) {
             throw new Error('Ошибка получения данных от сервера');
         }
@@ -98,7 +98,7 @@ getProducts('beverages');
 
 async function get_user() {
     try {
-        const response = await fetch('https://front-end-l0jy.onrender.com/users/me', {
+        const response = await fetch('https://back-render-qgwc.onrender.com/users/me', {
             method: 'GET',
             headers: {
                 'accept': 'application/json'

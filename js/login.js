@@ -13,7 +13,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
         formData.append('client_id', 1);
         formData.append('client_secret', 1);
 
-        const response = await fetch('https://front-end-l0jy.onrender.com/auth/login', {
+        const response = await fetch('https://back-render-qgwc.onrender.com/auth/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -26,7 +26,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
         //const data = await response.json();
 
         if (response.ok) {
-            const response2 = await fetch('https://front-end-l0jy.onrender.com/users/me', {
+            const response2 = await fetch('https://back-render-qgwc.onrender.com/users/me', {
                 method: 'GET',
                 headers: {
                     'accept': 'application/json'
