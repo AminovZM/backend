@@ -1,5 +1,5 @@
 
-// 'https://back-render-qgwc.onrender.com/auth/login'
+// 'http://127.0.0.1:8000/auth/login'
 
 document.getElementById('loginForm').addEventListener('submit', async function(event) {
     event.preventDefault();
@@ -16,7 +16,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
         formData.append('client_id', 1);
         formData.append('client_secret', 1);
 
-        const response = await fetch('https://back-render-qgwc.onrender.com/auth/login', {
+        const response = await fetch('http://127.0.0.1:8000/auth/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -28,7 +28,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
 
         if (response.ok) {
             // Отправьте второй запрос с этими куками
-            const response2 = await fetch('https://back-render-qgwc.onrender.com/current_user', {
+            const response2 = await fetch('http://127.0.0.1:8000/current_user', {
                 method: 'POST',
                 headers: {
                     //'Cookie': bondsCookie,
@@ -38,14 +38,15 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
                 withcredentials: true,
             });
 
-            const data2 = await response2.json();
+            //const data2 = await response2.json();
+            console.log(document.cookie);
             
             if (response2.ok) {
-                console.log(data2);
+                //console.log(data2);
                 alert("good");
                 // Если второй запрос успешен, отобразите успешное сообщение
-                document.getElementById('response').textContent = 'Вы вошли в систему\nstatus code ' + response.status;
-                window.location.href = '../index.html'; // Перенаправление на другую страницу в той же директории
+                //document.getElementById('response').textContent = 'Вы вошли в систему\nstatus code ' + response.status;
+                //window.location.href = '../index.html'; // Перенаправление на другую страницу в той же директории
             } else {
                 // Если второй запрос вернул ошибку, отобразите сообщение об ошибке
                 alert("error");
